@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block content %}
+  <form class="form-signin w-50 m-auto" method="post">
+    <div class="form-floating">
+      <input name="username" id="username" class="form-control" placeholder="Username" required>
+      <label for="username">Username</label>
+    </div>
+
+    <div class="form-floating mt-2">
+      <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+      <label for="password">Password</label>
+    </div>
+
+    <div class="text-center mt-2">
+      <p>Not a member? <a href="{{ url_for('auth.signup') }}">Create one!</a></p>
+    </div>
+
+    <button class="btn btn-primary w-100 py-2" type="submit">Sign In</button>
+  </form>
+  
+  <div class="w-50 m-auto mt-2">
+    <p>You need to sign in for browsing all jobs. You can create your own account by registering, your new account will have <strong>Viewer</strong> permission.</p>
+    <ul>
+      <li>
+        Using  username: <i>Bob</i>, password: <i>test</i> to sigin as <strong>Editor</strong>
+        Editor can create/view/edit/delete jobs.
+      </li>
+      <li>
+        Using username: <i>Jane</i>, password: <i>test</i> to sigin as <strong>Viewer</strong>
+        Viewer can only view jobs.
+      </li>
+    </ul>
+  </div>
+{% endblock %}

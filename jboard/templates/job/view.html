@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% if g.user['role'] == 'editor' %}
+  <div class="z-3 position-fixed bottom-0 end-0 mb-4 me-4">
+      <a class="btn btn-primary" href="{{ url_for('job.create') }}">New Job</a>
+  </div>
+{% endif %}
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+  {% for job in jobs %}
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header py-3">
+          <h5 class="my-0 fw-normal">{{ job['title'] }}</h5>
+          <h6 class="my-0 fw-light">{{ job['company'] }}</h6>
+        </div>
+        <div class="card-body">
+          <h2 class="card-title pricing-card-title">${{ job['salary'] }}<small class="text-body-secondary fw-light">/mo</small></h1>
+          <p class="card-text">{{ job['body'] }}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            {% if g.user['role'] == 'editor' %}
+              <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('job.update', id=job['id']) }}">Edit</a>
+            {% endif %}
+            <small class="text-body-secondary text-italic">{{ job['created_at'].strftime('%Y-%h-%d') }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

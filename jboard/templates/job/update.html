@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Edit "{{ job['title'] }}"{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form class="w-50 m-auto" method="post">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input class="form-control" name="title" id="title" placeholder="title" value="{{ request.form['title'] or job['title'] }}" required>
+    </div>
+    <div class="mb-3">
+      <label for="company" class="form-label">Company</label>
+      <input class="form-control" name="company" id="company" placeholder="company" value="{{ request.form['company'] or job['company'] }}" required>
+    </div>
+    <div class="mb-3">
+      <label for="salary" class="form-label">Salary</label>
+      <input type="number" class="form-control" name="salary" id="salary" placeholder="salary" value="{{ request.form['salary'] or job['salary'] }}" required>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" name="description" id="description" rows="3">{{ request.form['body'] or job['body'] }}</textarea>
+    </div>
+
+    <div class="btn-group w-100 py-2" role="group" aria-label="Basic mixed styles example">
+      <button class="btn btn-outline-primary" type="submit">Update</button>
+      <a class="btn btn-outline-primary" href="{{ url_for('index') }}">Cancel</a>
+    </div>
+  </div>
+  </form>
+  <form class="w-50 m-auto py-2" action="{{ url_for('job.delete', id=job['id']) }}" method="post">
+    <button class="btn btn-outline-secondary w-100 py-2" onclick="return confirm('Are you sure?');">Delete</button>
+  </form>
+{% endblock %}
