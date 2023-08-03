@@ -2,23 +2,16 @@
 runtime: python
 env: flex
 entrypoint: gunicorn -b :$PORT app:app
-env_variables:
-  SECRET_KEY: b76b1d509351c7b96a6c0c7782293e96b161fbdda836ec1c7a083ed0252a1250
-  DBHOST: /cloudsql/tinhtt-003:asia-east1:postgres-001
-  DBNAME: jboard
-  DBUSER: jboard
-  DBPASS: admin
 
 beta_settings:
-  cloud_sql_instances: tinhtt-003:asia-east1:postgres-001
+  cloud_sql_instances: tinhtt-007:asia-east1:postgres-001
 
-automatic_scaling:
-  min_num_instances: 1
-  max_num_instances: 5
+manual_scaling:
+  instances: 1
 
 resources:
   cpu: 1
-  memory_gb: 0.5
+  memory_gb: 1
   disk_size_gb: 10
   
 runtime_config:
